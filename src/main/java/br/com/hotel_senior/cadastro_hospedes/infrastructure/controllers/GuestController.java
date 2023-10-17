@@ -2,8 +2,8 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers;
 
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.GuestUseCase;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestRequest;
-import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestToDomainMapper;
-import org.springframework.http.RequestEntity;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndDomainMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +18,15 @@ import java.net.URI;
 public class GuestController {
 
     private final GuestUseCase guestUseCase;
-    private final RequestToDomainMapper mapper;
+    private final RequestAndDomainMapper mapper;
 
-    public GuestController(GuestUseCase guestUseCase, RequestToDomainMapper mapper) {
+    public GuestController(GuestUseCase guestUseCase, RequestAndDomainMapper mapper) {
         this.guestUseCase = guestUseCase;
         this.mapper = mapper;
     }
 
     @PostMapping
-    public ResponseEntity<?> saveGuest(@RequestBody GuestRequest guestRequest, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<?> saveGuest(@Valid @RequestBody GuestRequest guestRequest, UriComponentsBuilder uriComponentsBuilder){
         var guestObjDomain = mapper.fromRequestToDomain(guestRequest);
         guestUseCase.hotelGuestRegistration(guestObjDomain);
         URI uri = uriComponentsBuilder.path("{guests}").buildAndExpand(guestRequest).toUri();

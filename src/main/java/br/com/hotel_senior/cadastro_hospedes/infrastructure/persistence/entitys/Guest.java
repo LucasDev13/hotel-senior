@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 @Entity
 @Table(name = "tbl_hospede")
 public class Guest {
@@ -20,4 +19,13 @@ public class Guest {
     private String documento;
     @Column(name = "telefone_hospede", nullable = false)
     private String telefone;
+
+    public Guest() {
+    }
+
+    public Guest(String nome, String documento, String telefone) {
+        this.nome = nome;
+        this.documento = documento;
+        this.telefone = telefone;
+    }
 }
