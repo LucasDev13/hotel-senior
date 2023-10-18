@@ -3,8 +3,10 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers;
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.GuestUseCase;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestRequest;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.HotelGuestUpdateRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponse;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndResponseDomainMapper;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,7 @@ public class GuestController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<?> saveGuest(@Valid @RequestBody GuestRequest guestRequest, UriComponentsBuilder uriComponentsBuilder){
         var guestObjDomain = mapper.fromRequestToDomain(guestRequest);
         guestUseCase.hotelGuestRegistration(guestObjDomain);
@@ -37,9 +40,16 @@ public class GuestController {
     }
 
     @GetMapping
-    public Page<GuestResponse> listPageableAllGuest(@PageableDefault(direction = Sort.Direction.ASC, sort = "nome", page = 0, size = 10) Pageable pagination){
+    public Page<GuestResponse> listPageableAllGuest(@PageableDefault(direction = Sort.Direction.ASC, sort = "name", page = 0, size = 10) Pageable pagination){
             Page<GuestDomain> guestObjDomain = guestUseCase.consultAllGuests(pagination);
             var pageableResponse = mapper.fromDomainToResponse(guestObjDomain);
             return pageableResponse;
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateGuest(@PathVariable Long id, @Valid @RequestBody HotelGuestUpdateRequest hotelGuestUpdateRequest){
+        var objDomainUpdate = mapper.fromRequestUpdadeToDomain(hotelGuestUpdateRequest);
+        var objdomain = guestUseCase.hotelGuestUpdateRequest(id, objDomainUpdate);
+        return ResponseEntity.ok().body(mapper.fromDomainUpdadeToResponse(objdomain));
     }
 }
