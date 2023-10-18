@@ -1,7 +1,7 @@
 package br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys;
 
+import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpdate;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -11,21 +11,27 @@ public class Guest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_hospede", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    @Column(name = "nome_hospede", updatable = false, nullable = false)
-    private String nome;
-    @Column(name = "documento_hospede", nullable = false)
-    private String documento;
-    @Column(name = "telefone_hospede", nullable = false)
-    private String telefone;
+    @Column(name = "nome", updatable = false, nullable = false)
+    private String name;
+    @Column(name = "documento", nullable = false)
+    private String document;
+    @Column(name = "telefone", nullable = false)
+    private String telephone;
 
     public Guest() {
     }
 
-    public Guest(String nome, String documento, String telefone) {
-        this.nome = nome;
-        this.documento = documento;
-        this.telefone = telefone;
+    public Guest(String name, String document, String telephone) {
+        this.name = name;
+        this.document = document;
+        this.telephone = telephone;
+    }
+
+    public void updateInformation(GuestDomainUpdate objUpdate) {
+        this.name = objUpdate.name();
+        this.document = objUpdate.document();
+        this.telephone = objUpdate.telephone();
     }
 }
