@@ -4,7 +4,7 @@ import br.com.hotel_senior.cadastro_hospedes.application.gateways.RegisterGuestG
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.GuestUseCase;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl.RegisterGuestGatewayImpl;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.DomainAndEntityMapper;
-import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndDomainMapper;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndResponseDomainMapper;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,8 @@ public class BeansConfig {
     }
 
     @Bean
-    RequestAndDomainMapper requestToDomainMapper(){
-        return new RequestAndDomainMapper();
+    RequestAndResponseDomainMapper requestToDomainMapper(){
+        return new RequestAndResponseDomainMapper();
     }
 
     @Bean

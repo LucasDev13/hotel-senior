@@ -4,27 +4,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import jakarta.validation.constraints.Pattern;
 
-@Data
-@AllArgsConstructor
-public class GuestRequest {
-
+public record GuestRequest(
     @JsonProperty(value = "nome", required = true)
-    @NotNull(message = "Não pode ser null!")
-    @NotBlank(message = "Não pode ser em branco!")
+    @NotBlank(message = "Não pode ser em branco e null!")
     @NotEmpty(message = "Não pode estar vazio!")
-    private String name;
+    String name,
     @JsonProperty(value = "documento", required = true)
-    @NotNull(message = "Não pode ser null!")
-    @NotBlank(message = "Não pode ser em branco!")
+    @NotBlank(message = "Não pode ser em branco e null!")
     @NotEmpty(message = "Não pode estar vazio!")
-    private String document;
+    @Pattern(regexp = "\\d{11}")
+    String document,
     @JsonProperty(value = "telefone", required = true)
     @NotNull(message = "Não pode ser null!")
     @NotBlank(message = "Não pode ser em branco!")
     @NotEmpty(message = "Não pode estar vazio!")
-    private String telephone;
-
-}
+    @Pattern(regexp = "\\d{11}")
+    String telephone
+    ){}

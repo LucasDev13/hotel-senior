@@ -2,19 +2,23 @@ package br.com.hotel_senior.cadastro_hospedes.application.usecases;
 
 import br.com.hotel_senior.cadastro_hospedes.application.gateways.RegisterGuestGateway;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public class GuestUseCase{
 
-    private final RegisterGuestGateway registerGuest;
+    private final RegisterGuestGateway registerGuestGateway;
 
-    public GuestUseCase(RegisterGuestGateway registerGuest) {
-        this.registerGuest = registerGuest;
+    public GuestUseCase(RegisterGuestGateway registerGuestGateway) {
+        this.registerGuestGateway = registerGuestGateway;
     }
 
 
     public void hotelGuestRegistration(GuestDomain guestDomain) {
+        registerGuestGateway.registerGuest(guestDomain);
+    }
 
-        registerGuest.registerGuest(guestDomain);
-
+    public Page<GuestDomain> consultAllGuests(Pageable pagination) {
+        return registerGuestGateway.consultAllGuests(pagination);
     }
 }
