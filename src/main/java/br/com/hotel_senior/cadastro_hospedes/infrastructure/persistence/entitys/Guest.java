@@ -13,7 +13,7 @@ public class Guest {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    @Column(name = "nome", updatable = false, nullable = false)
+    @Column(name = "nome", nullable = false)
     private String name;
     @Column(name = "documento", nullable = false)
     private String document;
