@@ -1,7 +1,5 @@
 package br.com.hotel_senior.cadastro_hospedes.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 import java.time.Instant;
 
 public record StandardError(
