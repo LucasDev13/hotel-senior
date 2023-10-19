@@ -20,6 +20,6 @@ public record GuestRequest(
     @NotNull(message = "Não pode ser null!")
     @NotBlank(message = "Não pode ser em branco!")
     @NotEmpty(message = "Não pode estar vazio!")
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{12}")
     String telephone
     ){}
