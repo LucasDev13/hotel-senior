@@ -103,8 +103,8 @@ http://localhost:8080/swagger-ui.html
   }
   ```
 - Deletar hospedes:
-  * `DELETE`
   * http://localhost:8080/v1/api/guests/1
+  * `DELETE`
 
 - Fazer checkin:
   * http://localhost:8080/v1/api/checkin
