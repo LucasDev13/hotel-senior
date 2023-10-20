@@ -1,10 +1,5 @@
---insert into tbl_hospede (id, nome, documento, telefone) values(1, 'Judite', '00000000000', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(2, 'Jurival', '00000000000', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(3, 'Astoncio', '11111111111', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(4, 'Burtilio', '22222222222', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(5, 'Izidorio', '33333333333', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(6, 'Lucas', '33333333333', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(7, 'Thais', '03698106000', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(8, 'Gardenia', '03698106000', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(9, 'Januario', '03698106000', '04299252211');
---insert into tbl_hospede (id, nome, documento, telefone) values(10, 'Xasira', '03698106000', '04299252211');
+insert into tbl_hospede (id, nome, documento, telefone) values(1, 'Judite', '00000000000', '042998252211');
+insert into tbl_hospede (id, nome, documento, telefone) values(2, 'Jurival', '11111111111', '042999017389');
+insert into tbl_hospede (id, nome, documento, telefone) values(3, 'Astoncio', '22222222222', '042998663390');
+insert into tbl_hospede (id, nome, documento, telefone) values(4, 'Burtilio', '33333333333', '042999094402');
+insert into tbl_hospede (id, nome, documento, telefone) values(5, 'Izidorio', '55555555555', '042999085510');
