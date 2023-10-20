@@ -44,10 +44,7 @@ Para acessar o projeto acesse este link e realize o clone em sua máquina:
 
 * [Projeto hotel senior](https://github.com/LucasDev13/hotel-senior)
 
-### Swagger da api
-http://localhost:8080/swagger-ui.html
-
-### Passo a passo
+### Passo a passo para criar o banco de dados.
 - Clonar o projeto
 - Rodar o docker compose que esta dentro da pasta de resource para poder subir os containers do postgres
 e do pgadmin: `$ docker compose up -d`
@@ -73,9 +70,58 @@ e do pgadmin: `$ docker compose up -d`
 - Desta maneira as tabelas serão criadas.
   * ![img_7.png](img_7.png)
 
+### Passo a passo para utilizar as requisições do projeto.
+- ### Swagger da api
+http://localhost:8080/swagger-ui.html
 
-### Additional Links
-These additional references should also help you:
+* Requisições que foram criadas:
+  * ![img_8.png](img_8.png)
 
-* [Declarative REST calls with Spring Cloud OpenFeign sample](https://github.com/spring-cloud-samples/feign-eureka)
+### Json para requisições e suas uri:
+- Cadastro de hospedes:
+  * http://localhost:8080/v1/api/guests
+  * `POST`
+    ```
+    {
+        "nome": "Mariana",
+        "documento": "03698106000",
+        "telefone": "042999098571"
+    }
+    ```
+- Listar hospedes paginado, podendo trazer todos os hospedes:
+  *  http://localhost:8080/v1/api/guests
+  * `GET`
 
+- Atualizar hospedes por id:
+  * http://localhost:8080/v1/api/guests/1
+  * `PUT`
+  ```
+  {
+    "nome": "novo nome do hospede",
+    "documento": "99999999999",
+    "telefone": "032999046660"
+  }
+  ```
+- Deletar hospedes:
+  * `DELETE`
+  * http://localhost:8080/v1/api/guests/1
+
+- Fazer checkin:
+  * http://localhost:8080/v1/api/checkin
+  * `POST`
+  ```
+    {
+    "hospede":{
+    "nome": "Izidorio",
+    "documento": "55555555555",
+    "telefone": "042999085510"
+    },
+    "dataEntrada": "2023-10-20T08:00:00",
+    "dataSaida": "2023-10-26T10:17:00",
+    "adicionalVeiculo": "true"
+    }
+  ```
+- Listar hospedes por parametros:
+  * http://localhost:8080/v1/api/guests?param=03698106000
+  * `GET`
+  * Param recebe o nome, documento ou telefone 
