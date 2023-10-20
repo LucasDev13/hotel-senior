@@ -7,6 +7,9 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.HotelGuestUpdateRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponse;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndResponseDomainMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,7 +20,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.URI;
 
 @RestController
@@ -34,6 +36,13 @@ public class GuestController {
 
     @PostMapping
     @Transactional
+    @Operation(summary = "Registra um hospede no sistema.", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Hospede registrado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Dados de requisição inválida."),
+            @ApiResponse(responseCode = "400", description = "Parametros inválidos."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
+    })
     public ResponseEntity<?> saveGuest(@Valid @RequestBody GuestRequest guestRequest, UriComponentsBuilder uriComponentsBuilder){
         var guestObjDomain = mapper.fromRequestToDomain(guestRequest);
         guestUseCase.hotelGuestRegistration(guestObjDomain);
@@ -42,12 +51,26 @@ public class GuestController {
     }
 
     @GetMapping
-    public Page<GuestResponse> listPageableAllGuest(@PageableDefault(direction = Sort.Direction.ASC, sort = "name", page = 0, size = 10) Pageable pagination){
+    @Operation(summary = "Realiza um busca paginada no sistema.", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Dados de requisição inválida."),
+            @ApiResponse(responseCode = "400", description = "Parametros inválidos."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
+    })
+    public ResponseEntity<Page<GuestResponse>> listPageableAllGuest(@PageableDefault(sort = "name", page = 0, size = 10) Pageable pagination){
             Page<GuestDomainById> guestObjDomain = guestUseCase.consultAllGuests(pagination);
-            return mapper.fromDomainToResponse(guestObjDomain);
+            return ResponseEntity.ok().body(mapper.fromDomainToResponse(guestObjDomain));
     }
 
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Realiza uma atualização de um hospede no sistema pelo id.", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Update realizado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Dados de requisição inválida."),
+            @ApiResponse(responseCode = "400", description = "Parametros inválidos."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
+    })
     public ResponseEntity<?> updateGuest(@PathVariable Long id, @Valid @RequestBody HotelGuestUpdateRequest hotelGuestUpdateRequest){
         var objDomainUpdate = mapper.fromRequestUpdadeToDomain(hotelGuestUpdateRequest);
         var objdomain = guestUseCase.hotelGuestUpdateRequest(id, objDomainUpdate);
@@ -55,6 +78,13 @@ public class GuestController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @Operation(summary = "Registra delete do hospede no sistema por meio do id.", method = "DELETE")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = ":NoContent, operação realizada com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Dados de requisição inválida."),
+            @ApiResponse(responseCode = "400", description = "Parametros inválidos."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
+    })
     public ResponseEntity<Void> deleteGuest(@PathVariable Long id){
         try{
             guestUseCase.deleteGuest(id);
