@@ -1,9 +1,11 @@
 package br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers;
 
+import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.CheckinDomain;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainById;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpdate;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Hotel;
 import org.springframework.data.domain.Page;
 
 public class DomainAndEntityMapper {
@@ -28,5 +30,13 @@ public class DomainAndEntityMapper {
 
     public GuestDomainUpdate fromEntityUpdateToDomain(Guest entity) {
         return new GuestDomainUpdate(entity.getName(), entity.getDocument(), entity.getTelephone());
+    }
+
+    public Hotel fromDomainToEntity(CheckinDomain checkinDomain){
+        return new Hotel(checkinDomain.entryDate(),checkinDomain.departureDate(),
+                checkinDomain.vehicleAdditional(),
+                new Guest(checkinDomain.guestDomain().name(),
+                          checkinDomain.guestDomain().document(),
+                          checkinDomain.guestDomain().telephone()));
     }
 }

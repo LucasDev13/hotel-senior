@@ -22,4 +22,17 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(status).body(err);
     }
+
+    @ExceptionHandler(DataUniqueViolationException.class)
+    public ResponseEntity<StandardError> dataUniqueViolation(DataUniqueViolationException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Document already registered",
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(err);
+    }
 }
