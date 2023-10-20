@@ -8,6 +8,9 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Hotel;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DomainAndEntityMapper {
 
     public Guest fromDomainToEntity(GuestDomain domain){
@@ -38,5 +41,11 @@ public class DomainAndEntityMapper {
                 new Guest(checkinDomain.guestDomain().name(),
                           checkinDomain.guestDomain().document(),
                           checkinDomain.guestDomain().telephone()));
+    }
+
+    public List<GuestDomain> fromEntityListToDomainList(List<Guest> guestsParam) {
+        return guestsParam.stream()
+                .map( guest -> new GuestDomain(guest.getName(), guest.getDocument(), guest.getTelephone()))
+                .collect(Collectors.toList());
     }
 }

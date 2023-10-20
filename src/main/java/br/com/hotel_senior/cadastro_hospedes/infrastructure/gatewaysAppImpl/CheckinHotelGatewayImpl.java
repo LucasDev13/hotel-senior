@@ -2,12 +2,14 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl;
 
 import br.com.hotel_senior.cadastro_hospedes.application.gateways.CheckinHotelGateway;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.CheckinDomain;
+import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.DomainAndEntityMapper;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Hotel;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.CheckinHotelRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
 import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @Slf4j
 public class CheckinHotelGatewayImpl implements CheckinHotelGateway {
@@ -28,5 +30,11 @@ public class CheckinHotelGatewayImpl implements CheckinHotelGateway {
         hotel.setGuest(guest);
         checkinHotelRepository.save(hotel);
         log.info("Objeto salvo!");
+    }
+
+    @Override
+    public List<GuestDomain> findGuests(String param) {
+        List<Guest> guestsParam = guestRepository.findByNameContainingIgnoreCaseOrDocumentContainingOrTelephoneContaining(param, param, param);
+        return mapper.fromEntityListToDomainList(guestsParam);
     }
 }

@@ -8,8 +8,11 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.HotelGuestUpdateRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponse;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponseList;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.HotelGuestUpdateResponse;
 import org.springframework.data.domain.Page;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RequestAndResponseDomainMapper {
 
@@ -41,5 +44,11 @@ public class RequestAndResponseDomainMapper {
                         checkinHotelRequest.guestRequest().telephone()
                 ), checkinHotelRequest.entryDate(), checkinHotelRequest.departureDate(),
                    checkinHotelRequest.vehicleAdditional());
+    }
+
+    public List<GuestResponseList> fromDomainListToResponseList(List<GuestDomain> guests) {
+        return guests.stream()
+                .map(response -> new GuestResponseList(response.name(), response.document(), response.telephone()))
+                .collect(Collectors.toList());
     }
 }
