@@ -7,7 +7,7 @@ import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpda
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Hotel;
 import org.springframework.data.domain.Page;
-
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +40,8 @@ public class DomainAndEntityMapper {
                 checkinDomain.vehicleAdditional(),
                 new Guest(checkinDomain.guestDomain().name(),
                           checkinDomain.guestDomain().document(),
-                          checkinDomain.guestDomain().telephone()));
+                          checkinDomain.guestDomain().telephone()),
+                BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
     public List<GuestDomain> fromEntityListToDomainList(List<Guest> guestsParam) {

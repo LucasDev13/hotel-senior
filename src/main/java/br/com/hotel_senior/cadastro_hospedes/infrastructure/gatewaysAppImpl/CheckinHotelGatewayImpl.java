@@ -9,6 +9,7 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.CheckinHotelRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
 import lombok.extern.slf4j.Slf4j;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -24,10 +25,12 @@ public class CheckinHotelGatewayImpl implements CheckinHotelGateway {
     }
 
     @Override
-    public void registerCheckinHotel(CheckinDomain checkinDomain) {
+    public void registerCheckinHotel(BigDecimal parkingFee, BigDecimal priceHotel, CheckinDomain checkinDomain) {
         Hotel hotel = mapper.fromDomainToEntity(checkinDomain);
         Guest guest = guestRepository.findByDocument(checkinDomain.guestDomain().document());
         hotel.setGuest(guest);
+        hotel.setPriceHotel(priceHotel);
+        hotel.setParkingFee(parkingFee);
         checkinHotelRepository.save(hotel);
         log.info("Objeto salvo!");
     }
