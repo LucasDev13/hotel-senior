@@ -21,8 +21,8 @@ public class BeansConfig {
     }
 
     @Bean
-    CheckinUseCase checkinUseCase(CheckinHotelGateway checkinHotelGateway){
-        return new CheckinUseCase(checkinHotelGateway);
+    CheckinUseCase checkinUseCase(CheckinHotelGateway checkinHotelGateway, RequestAndResponseDomainMapper mapper){
+        return new CheckinUseCase(checkinHotelGateway, mapper);
     }
 
     @Bean
