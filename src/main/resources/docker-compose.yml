@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: myuserSenior
+      POSTGRES_PASSWORD: myPasswordHotelSenior
+      POSTGRES_DB: db_senior_hotel
+    ports:
+      - "15432:5432"
+    networks:
+      - postgres-compose-network
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:7.8
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "hotel.senior@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "senior"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-compose-network
+
+networks:
+  postgres-compose-network:
+    driver: bridge
