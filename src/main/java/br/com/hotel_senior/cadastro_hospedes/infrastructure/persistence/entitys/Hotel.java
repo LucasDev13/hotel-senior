@@ -2,7 +2,7 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,12 +23,16 @@ public class Hotel {
     private Boolean vehicleAdditional;
     @OneToOne(cascade = CascadeType.ALL)
     private Guest guest;
+    private BigDecimal priceHotel;
+    private BigDecimal parkingFee;
 
     public Hotel(LocalDateTime entryDate, LocalDateTime departureDate,
-                 Boolean vehicleAdditional, Guest guest) {
+                 Boolean vehicleAdditional, Guest guest, BigDecimal priceHotel, BigDecimal parkingFee ) {
         this.entryDate = entryDate;
         this.departureDate = departureDate;
         this.vehicleAdditional = vehicleAdditional;
         this.guest = guest;
+        this.priceHotel = priceHotel;
+        this.parkingFee = parkingFee;
     }
 }
