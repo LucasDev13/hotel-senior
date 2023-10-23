@@ -44,6 +44,20 @@ Para acessar o projeto acesse este link e realize o clone em sua máquina:
 
 * [Projeto hotel senior](https://github.com/LucasDev13/hotel-senior)
 
+### Profiles
+- O projeto consiste em três profiles:
+  - `default` &rarr; application.properties &rarr; Propriedades para todo o projeto
+  - `test` &rarr; application-dev.properties &rarr; Propriedades do banco H2
+  - `dev` &rarr; application-dev.properties &rarr; Propriedades do banco PostgreSQL
+---
+`OBS:` Especifique em qual perfil o projeto será rodado em `application.properties`
+
+### Profile de dev
+![img_9.png](img_9.png)
+
+### Profile de test
+![img_10.png](img_10.png)
+
 ### Passo a passo para criar o banco de dados.
 - Clonar o projeto
 - Rodar o docker compose que esta dentro da pasta de resource para poder subir os containers do postgres
