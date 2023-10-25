@@ -7,6 +7,7 @@ import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpda
 import br.com.hotel_senior.cadastro_hospedes.exceptions.ResourceNotFoundException;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.DomainAndEntityMapper;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.HotelReservation;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.CheckinHotelRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.HotelRepository;
@@ -65,9 +66,19 @@ public class GuestGatewayImpl implements GuestGateway {
     }
 
     @Override
+    @Transactional
     public void deleteGuest(Long id) {
+        Guest guest = guestRepository.findById(id).orElse(null);
+        if(guest != null){
+            HotelReservation reservation = guest.getHotelReservation();
+            if(reservation != null){
+                reservation.setGuest(null);
+                checkinHotelRepository.save(reservation);
+            }
+        }
         if (guestRepository.existsById(id)) {
             guestRepository.deleteById(id);
+            log.info("Guest deleted from the system!");
         } else {
             throw new ResourceNotFoundException("Id not found " + id);
         }
