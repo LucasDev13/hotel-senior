@@ -5,11 +5,11 @@ import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainById;
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpdate;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
-import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Hotel;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.HotelReservation;
 import org.springframework.data.domain.Page;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DomainAndEntityMapper {
 
@@ -35,18 +35,19 @@ public class DomainAndEntityMapper {
         return new GuestDomainUpdate(entity.getName(), entity.getDocument(), entity.getTelephone());
     }
 
-    public Hotel fromDomainToEntity(CheckinDomain checkinDomain){
-        return new Hotel(checkinDomain.entryDate(),checkinDomain.departureDate(),
-                checkinDomain.vehicleAdditional(),
-                new Guest(checkinDomain.guestDomain().name(),
-                          checkinDomain.guestDomain().document(),
-                          checkinDomain.guestDomain().telephone()),
-                BigDecimal.ZERO, BigDecimal.ZERO);
+    public HotelReservation fromDomainToEntity(CheckinDomain checkinDomain){
+        List<Guest> guests = new ArrayList<>();
+        var guest = new Guest(checkinDomain.guestDomainCheckin().name(),
+                checkinDomain.guestDomainCheckin().document(),
+                checkinDomain.guestDomainCheckin().telephone());
+        guests.add(guest);
+        return new HotelReservation(guest, checkinDomain.entryDate(), checkinDomain.departureDate(),
+                checkinDomain.vehicleAdditional(), BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
     public List<GuestDomain> fromEntityListToDomainList(List<Guest> guestsParam) {
-        return guestsParam.stream()
+        return null; /*guestsParam.stream()
                 .map( guest -> new GuestDomain(guest.getName(), guest.getDocument(), guest.getTelephone()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 }

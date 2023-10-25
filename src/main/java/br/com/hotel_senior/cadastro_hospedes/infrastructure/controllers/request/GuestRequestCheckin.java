@@ -6,10 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record GuestRequest(
-        @JsonProperty(value = "hotel", required = true)
-        @NotNull(message = "Não pode ser em branco e null!")
-        HotelRequest hotelRequest,
+public record GuestRequestCheckin(
         @JsonProperty(value = "nome", required = true)
         @NotBlank(message = "Não pode ser em branco e null!")
         @NotEmpty(message = "Não pode estar vazio!")

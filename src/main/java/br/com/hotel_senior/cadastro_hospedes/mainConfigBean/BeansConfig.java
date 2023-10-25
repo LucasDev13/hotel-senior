@@ -10,6 +10,7 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.DomainAndEnt
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndResponseDomainMapper;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.CheckinHotelRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.HotelRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,8 +32,11 @@ public class BeansConfig {
     }
 
     @Bean
-    GuestGateway registerGuestGateway(GuestRepository guestRepository, DomainAndEntityMapper mapper){
-        return new GuestGatewayImpl(guestRepository, mapper);
+    GuestGateway registerGuestGateway(GuestRepository guestRepository,
+                                      CheckinHotelRepository checkinHotelRepository,
+                                      DomainAndEntityMapper mapper,
+                                      HotelRepository hotelRepository){
+        return new GuestGatewayImpl(guestRepository, mapper, checkinHotelRepository, hotelRepository);
     }
 
     @Bean

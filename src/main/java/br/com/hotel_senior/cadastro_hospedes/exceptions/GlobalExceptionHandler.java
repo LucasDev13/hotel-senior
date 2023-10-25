@@ -23,6 +23,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    @ExceptionHandler(GuestDocumentNotFoundException.class)
+    public ResponseEntity<StandardError> guestDocumentNotFound(GuestDocumentNotFoundException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Guest document not found",
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(err);
+    }
+
     @ExceptionHandler(DataUniqueViolationException.class)
     public ResponseEntity<StandardError> dataUniqueViolation(DataUniqueViolationException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;

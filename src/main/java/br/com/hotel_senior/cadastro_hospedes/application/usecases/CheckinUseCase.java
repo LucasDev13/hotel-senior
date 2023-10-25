@@ -18,8 +18,8 @@ public class CheckinUseCase {
 
     private final CheckinHotelGateway checkinHotelGateway;
     private final RequestAndResponseDomainMapper mapper;
-    private BigDecimal priceHotel = BigDecimal.valueOf(120.00);
-    private BigDecimal parkingFee = BigDecimal.valueOf(15.00);
+    private BigDecimal priceHotel;
+    private BigDecimal parkingFee;
     private ZoneId zoneId = ZoneId.of("America/Sao_Paulo");
 
     public CheckinUseCase(CheckinHotelGateway checkinHotelGateway, RequestAndResponseDomainMapper mapper) {
@@ -28,6 +28,9 @@ public class CheckinUseCase {
     }
 
     public void registerCheckinHotel(CheckinDomain checkinDomain) {
+        priceHotel = BigDecimal.ZERO;
+        parkingFee = BigDecimal.ZERO;
+
         var dateToday = LocalDateTime.now(zoneId);
         var dayOfWeek = dateToday.getDayOfWeek();
         Long days = ChronoUnit.DAYS.between(checkinDomain.entryDate(), checkinDomain.departureDate());
@@ -37,6 +40,7 @@ public class CheckinUseCase {
                 priceHotel = BigDecimal.valueOf(150.00);
             }
             if(days >= 2){
+                priceHotel = BigDecimal.valueOf(120.00);
                 priceHotel = priceHotel.multiply(BigDecimal.valueOf(days));
                 log.info(priceHotel.toString());
             }else {
@@ -48,6 +52,7 @@ public class CheckinUseCase {
                 parkingFee = BigDecimal.valueOf(20.00);
             }
             if(days >= 2){
+                parkingFee = BigDecimal.valueOf(15.00);
                 parkingFee = parkingFee.multiply(new BigDecimal(days.toString()));
                 log.info(parkingFee.toString());
             }else {
@@ -55,6 +60,8 @@ public class CheckinUseCase {
             }
         }
         checkinHotelGateway.registerCheckinHotel(parkingFee, priceHotel, checkinDomain);
+        priceHotel = BigDecimal.ZERO;
+        parkingFee = BigDecimal.ZERO;
     }
 
     public List<GuestResponseList> findGuests(String param) {
