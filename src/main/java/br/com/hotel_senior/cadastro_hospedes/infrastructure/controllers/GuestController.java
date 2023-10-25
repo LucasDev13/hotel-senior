@@ -59,8 +59,8 @@ public class GuestController {
             @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
     })
     public ResponseEntity<Page<GuestResponse>> listPageableAllGuest(@PageableDefault(sort = "name", page = 0, size = 10) Pageable pagination){
-            Page<GuestDomainById> guestObjDomain = guestUseCase.consultAllGuests(pagination);
-            return ResponseEntity.ok().body(mapper.fromDomainToResponse(guestObjDomain));
+        Page<GuestDomainById> guestObjDomain = guestUseCase.consultAllGuests(pagination);
+        return ResponseEntity.ok().body(mapper.fromDomainToResponse(guestObjDomain));
     }
 
     @PutMapping(value = "/{id}")

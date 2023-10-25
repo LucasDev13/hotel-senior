@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record CheckinHotelRequest(
         @JsonProperty(value = "hospede", required = true)
         @NotNull(message = "Não pode ser null!")
-        GuestRequest guestRequest,
+        GuestRequestCheckin guestRequestCheckin,
         @JsonProperty(value = "dataEntrada", required = true)
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "dd/MM/yyy")
         LocalDateTime entryDate,

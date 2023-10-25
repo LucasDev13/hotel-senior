@@ -10,15 +10,21 @@ import lombok.Data;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "nome", nullable = false)
     private String name;
-    @Column(name = "documento", nullable = false)
+    @Column(name = "documento", nullable = false, unique = true)
     private String document;
     @Column(name = "telefone", nullable = false)
     private String telephone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_hotel")
+    private Hotel hotel;
+
+    @OneToOne
+    private HotelReservation hotelReservation;
 
     public Guest() {
     }
