@@ -157,7 +157,8 @@ http://localhost:8080/swagger-ui.html
   "adicionalVeiculo": "true"
 }
 ```
-- Listar hospedes por parametros:
+- Listar hospedes por parâmetros:
   * http://localhost:8080/v1/api/guests?param=03698106000
   * `GET`
   * Param recebe o nome, documento ou telefone
+  * `OBS`: Utilize os parâmetros conforme os dados dos hospedes salvos.
