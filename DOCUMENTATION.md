@@ -17,21 +17,32 @@ ou telefone;
 - As consultas devem apresentar o valor (Valor total e o valor da última hospedagem)
 já gasto pelo hóspede no hotel;
 ---------
-### JSON exemplo do hóspede
+### JSON para cadastro do hóspede
+```
 {
- “nome”: “Fulano da SIlva”,
- “documento”: “123456”,
- “telefone”: “9925-2211”
+  "hotel":{
+    "nome": "hotel transilvania"
+  },
+  "nome": "Lucas",
+  "documento": "77777777777",
+  "telefone": "042999098571"
 }
+```
 ### JSON exemplo do check in
-`{`
-“hospede”: {...},
-“dataEntrada”: “2018-03-14T08:00:00”,
-“dataSaida”: “2018-03-16T10:17:00”,
-“adicionalVeiculo”: false/true
-`}`
---------------
-`data no padrão ISO-8601`
+```
+{
+  "hospede":{
+      "nome": "Lucas",
+  "documento": "77777777777",
+  "telefone": "042999098571"
+},
+  "dataEntrada": "2023-10-24T08:00:00",
+  "dataSaida": "2023-10-25T22:21:00",
+  "adicionalVeiculo": "true"
+}
+```
+- `data no padrão ISO-8601`
+----------
   ### Regras de negócio
   - Uma diária no hotel de segunda à sexta custa R$120,00;
   - Uma diária no hotel em finais de semana custa R$150,00;
@@ -95,13 +106,16 @@ http://localhost:8080/swagger-ui.html
 - Cadastro de hospedes:
   * http://localhost:8080/v1/api/guests
   * `POST`
-    ```
-    {
-        "nome": "Mariana",
-        "documento": "03698106000",
-        "telefone": "042999098571"
-    }
-    ```
+```
+{
+  "hotel":{ 
+    "nome": "hotel transilvania"
+  },
+  "nome": "Lucas",
+  "documento": "77777777777",
+  "telefone": "042999098571"
+}
+```
 - Listar hospedes paginado, podendo trazer todos os hospedes:
   *  http://localhost:8080/v1/api/guests
   * `GET`
@@ -123,19 +137,19 @@ http://localhost:8080/swagger-ui.html
 - Fazer checkin:
   * http://localhost:8080/v1/api/checkin
   * `POST`
-  ```
-    {
-    "hospede":{
-    "nome": "Izidorio",
-    "documento": "55555555555",
-    "telefone": "042999085510"
-    },
-    "dataEntrada": "2023-10-20T08:00:00",
-    "dataSaida": "2023-10-26T10:17:00",
-    "adicionalVeiculo": "true"
-    }
-  ```
+```
+{
+  "hospede":{
+    "nome": "Lucas",
+    "documento": "77777777777",
+    "telefone": "042999098571"
+},
+  "dataEntrada": "2023-10-24T08:00:00",
+  "dataSaida": "2023-10-25T22:21:00",
+  "adicionalVeiculo": "true"
+}
+```
 - Listar hospedes por parametros:
   * http://localhost:8080/v1/api/guests?param=03698106000
   * `GET`
-  * Param recebe o nome, documento ou telefone 
+  * Param recebe o nome, documento ou telefone
