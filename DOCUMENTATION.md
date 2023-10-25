@@ -81,8 +81,16 @@ e do pgadmin: `$ docker compose up -d`
   
 - Crie um novo sever
   * ![img_2.png](img_2.png)
+- Defina o nome do server
+- * ![img_11.png](img_11.png)
 - E insira as informações do postgres definidos no arquivo docker-compose e salve.
   * ![img.png](img.png)
+- `Host`: nome do container que foi criado o postgreSQL
+- `Port`: Porta padrão de conexão com o banco
+- `Maintenance database`: nome do banco de dados definido do docker-compose
+- `username`: usuario definido no docker-compose
+- `password`: senha definida no docker-compose
+ * Após essas configurações, é só clicar em `salvar`.
 
 - O banco de dados aparecerá desta maneira:
   * ![img_3.png](img_3.png)
