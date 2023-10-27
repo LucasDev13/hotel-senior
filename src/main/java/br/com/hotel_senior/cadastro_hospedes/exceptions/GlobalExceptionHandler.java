@@ -23,6 +23,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    @ExceptionHandler(InvalidCheckInDateException.class)
+    public ResponseEntity<StandardError> invalidCheckinDate(InvalidCheckInDateException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Invalid check-in date. Please provide the correct date.",
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(err);
+    }
+
     @ExceptionHandler(GuestDocumentNotFoundException.class)
     public ResponseEntity<StandardError> guestDocumentNotFound(GuestDocumentNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
