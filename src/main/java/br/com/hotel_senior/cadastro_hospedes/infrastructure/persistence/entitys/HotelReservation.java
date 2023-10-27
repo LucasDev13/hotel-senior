@@ -1,7 +1,9 @@
 package br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,6 +19,8 @@ public class HotelReservation {
 
     @ManyToOne
     @JoinColumn(name = "hospede_id")
+    @JsonIgnore
+    @ToString.Exclude
     private Guest guest;
 
     @Column(name = "data_entrada")
@@ -30,6 +34,9 @@ public class HotelReservation {
     private BigDecimal priceHotel;
     @Column(name = "valor_garagem")
     private BigDecimal parkingFee;
+
+    @Enumerated(EnumType.STRING)
+    private HotelBookingStatus hotelBookingStatus;
 
     public HotelReservation() {}
 

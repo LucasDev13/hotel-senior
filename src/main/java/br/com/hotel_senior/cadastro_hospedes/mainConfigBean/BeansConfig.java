@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeansConfig {
     @Bean
-    GuestUseCase guestUseCase(GuestGateway guestGateway){
-        return new GuestUseCase(guestGateway);
+    GuestUseCase guestUseCase(GuestGateway guestGateway, RequestAndResponseDomainMapper mapper){
+        return new GuestUseCase(guestGateway, mapper);
     }
 
     @Bean

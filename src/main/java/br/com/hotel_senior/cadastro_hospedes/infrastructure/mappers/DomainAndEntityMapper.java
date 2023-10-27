@@ -18,13 +18,12 @@ public class DomainAndEntityMapper {
     }
 
     public Page<GuestDomainById> convertPageableGuest(Page<Guest> guests) {
-        Page<GuestDomainById> pageDomain = guests.map(this::convertToObjDomain);
-        return pageDomain;
+        return guests.map(this::convertToObjDomain);
     }
 
     private GuestDomainById convertToObjDomain(Guest guest) {
-        GuestDomainById domain = new GuestDomainById(guest.getId(), guest.getName(), guest.getDocument(), guest.getTelephone());
-        return domain;
+        return new GuestDomainById(guest.getId(), guest.getName(), guest.getDocument(),
+                                    guest.getTelephone(), guest.getHotelReservation(), BigDecimal.ONE);
     }
 
     public Guest fromDomainToEntityUpdate(GuestDomainUpdate domain) {

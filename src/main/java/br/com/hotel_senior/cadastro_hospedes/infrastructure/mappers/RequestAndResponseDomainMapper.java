@@ -19,13 +19,13 @@ public class RequestAndResponseDomainMapper {
     }
 
     public Page<GuestResponse> fromDomainToResponse(Page<GuestDomainById> guestObjDomain) {
-        Page<GuestResponse> pageResponse = guestObjDomain.map(this::convertToObjResponse);
-        return pageResponse;
+        return guestObjDomain.map(this::convertToObjResponse);
     }
 
     private GuestResponse convertToObjResponse(GuestDomainById guestDomainById) {
-        GuestResponse response = new GuestResponse(guestDomainById.id(), guestDomainById.name(), guestDomainById.document(), guestDomainById.telephone());
-        return response;
+        return new GuestResponse(guestDomainById.id(), guestDomainById.name(),
+                guestDomainById.document(), guestDomainById.telephone(),
+                guestDomainById.hotelReservation(), guestDomainById.totalCostOfAccommodation());
     }
 
     public GuestDomainUpdate fromRequestUpdadeToDomain(HotelGuestUpdateRequest hotelGuestUpdateRequest) {
