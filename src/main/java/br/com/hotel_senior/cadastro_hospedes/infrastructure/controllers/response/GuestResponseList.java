@@ -3,12 +3,10 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.respons
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record GuestResponseList(
-        @JsonProperty(value = "nome", required = true)
+        @JsonProperty(value = "nome")
         String name,
-        @JsonProperty(value = "documento", required = true)
+        @JsonProperty(value = "documento")
         String document,
-        @JsonProperty(value = "telefone", required = true)
+        @JsonProperty(value = "telefone")
         String telephone
-) {
-
-}
+        ) {}

@@ -3,6 +3,7 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpdate;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -24,6 +25,7 @@ public class Guest {
     private Hotel hotel;
 
     @OneToOne
+    @ToString.Exclude
     private HotelReservation hotelReservation;
 
     public Guest() {

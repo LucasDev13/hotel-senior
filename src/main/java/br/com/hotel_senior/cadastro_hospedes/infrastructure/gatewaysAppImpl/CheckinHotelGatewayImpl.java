@@ -6,6 +6,7 @@ import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
 import br.com.hotel_senior.cadastro_hospedes.exceptions.GuestDocumentNotFoundException;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.DomainAndEntityMapper;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.HotelBookingStatus;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.HotelReservation;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.CheckinHotelRepository;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.repositorys.GuestRepository;
@@ -37,11 +38,10 @@ public class CheckinHotelGatewayImpl implements CheckinHotelGateway {
         reservation.setGuest(guest);
         reservation.setPriceHotel(priceHotel);
         reservation.setParkingFee(parkingFee);
+        reservation.setHotelBookingStatus(HotelBookingStatus.CHECKIN);
         checkinHotelRepository.save(reservation);
-
         guest.setHotelReservation(reservation);
         guestRepository.save(guest);
-
         log.info("Reserva realizada com sucesso!");
     }
 
