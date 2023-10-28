@@ -22,6 +22,7 @@ public class Guest {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_hotel")
+    @ToString.Exclude
     private Hotel hotel;
 
     @OneToOne
