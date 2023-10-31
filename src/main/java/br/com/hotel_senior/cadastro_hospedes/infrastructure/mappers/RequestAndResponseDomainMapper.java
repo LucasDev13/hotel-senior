@@ -2,6 +2,7 @@ package br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers;
 
 import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.*;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.CheckinHotelRequest;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestCheckoutRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.HotelGuestUpdateRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponse;
@@ -48,5 +49,9 @@ public class RequestAndResponseDomainMapper {
         return guests.stream()
                 .map(response -> new GuestResponseList(response.name(), response.document(), response.telephone()))
                 .collect(Collectors.toList());
+    }
+
+    public GuestCheckoutDomain fromCheckoutRequestToCheckoutDomain(GuestCheckoutRequest guestCheckoutRequest){
+        return new GuestCheckoutDomain(guestCheckoutRequest.document(), guestCheckoutRequest.checkoutDate());
     }
 }

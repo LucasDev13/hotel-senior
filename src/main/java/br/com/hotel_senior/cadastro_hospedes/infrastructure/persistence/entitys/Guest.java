@@ -20,8 +20,9 @@ public class Guest {
     @Column(name = "telefone", nullable = false)
     private String telephone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_hotel")
+    @ToString.Exclude
     private Hotel hotel;
 
     @OneToOne
@@ -41,5 +42,17 @@ public class Guest {
         this.name = objUpdate.name();
         this.document = objUpdate.document();
         this.telephone = objUpdate.telephone();
+    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", document='" + document + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", hotel=" + hotel +
+                ", hotelReservation=" + hotelReservation +
+                '}';
     }
 }
