@@ -54,12 +54,12 @@ public class BeansConfig {
     }
 
     @Bean
-    CheckoutUseCase checkoutUseCase(CheckoutGuestGateway checkoutGuestGateway){
-        return new CheckoutUseCase(checkoutGuestGateway);
+    CheckoutUseCase checkoutUseCase(DomainAndEntityMapper mapper, CheckoutGuestGateway checkoutGuestGateway){
+        return new CheckoutUseCase(mapper, checkoutGuestGateway);
     }
 
     @Bean
-    CheckoutGuestGateway checkoutGuestGateway(DomainAndEntityMapper mapper, CheckoutHotelRepository checkoutHotelRepository){
-        return new CheckoutGuestGatewayImpl(mapper, checkoutHotelRepository);
+    CheckoutGuestGateway checkoutGuestGateway(CheckoutHotelRepository checkoutHotelRepository){
+        return new CheckoutGuestGatewayImpl(checkoutHotelRepository);
     }
 }

@@ -1,9 +1,6 @@
 package br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers;
 
-import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.CheckinDomain;
-import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomain;
-import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainById;
-import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainUpdate;
+import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.*;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.Guest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.persistence.entitys.HotelReservation;
 import org.springframework.data.domain.Page;
@@ -48,5 +45,22 @@ public class DomainAndEntityMapper {
         return null; /*guestsParam.stream()
                 .map( guest -> new GuestDomain(guest.getName(), guest.getDocument(), guest.getTelephone()))
                 .collect(Collectors.toList());*/
+    }
+
+    public GuestDomainChechout fromEntityToDomainCheckout(Guest guest) {
+        return new GuestDomainChechout(
+                guest.getId(),
+                guest.getName(),
+                guest.getDocument(),
+                guest.getTelephone(),
+                new HotelDomain(guest.getHotel().getName()),
+                new HotelReservationDomain(
+                        guest.getHotelReservation().getEntryDate(),
+                        guest.getHotelReservation().getDepartureDate(),
+                        guest.getHotelReservation().getVehicleAdditional(),
+                        guest.getHotelReservation().getPriceHotel(),
+                        guest.getHotelReservation().getParkingFee(),
+                        guest.getHotelReservation().getHotelBookingStatus()
+        ));
     }
 }
