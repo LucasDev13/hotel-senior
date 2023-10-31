@@ -162,3 +162,13 @@ http://localhost:8080/swagger-ui.html
   * `GET`
   * Param recebe o nome, documento ou telefone
   * `OBS`: Utilize os parâmetros conforme os dados dos hospedes salvos.
+
+- Fazer checkout do hóspede:
+  * http://localhost:8080/v1/api/checkout
+  * `PUT`
+```
+{
+  "documento": "00000000000",
+  "dataCheckout": "2023-10-31T19:20:00"
+}
+```

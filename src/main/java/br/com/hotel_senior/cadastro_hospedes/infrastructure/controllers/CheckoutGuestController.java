@@ -6,7 +6,6 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndRe
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/api/checkout", produces = {"application/json"})
 public class CheckoutGuestController {
 
-    //Fazer a request
-    //Passar para usecase
-    //Passar para gatewaysAppImpl
-
     private final RequestAndResponseDomainMapper mapper;
     private final CheckoutUseCase checkoutUseCase;
 
@@ -28,7 +23,6 @@ public class CheckoutGuestController {
         this.mapper = mapper;
         this.checkoutUseCase = checkoutUseCase;
     }
-
 
     @PutMapping
     @Operation(summary = "Realiza uma atualização na reserva do hospede para checkout.", method = "PUT")
