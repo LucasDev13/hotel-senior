@@ -1,11 +1,14 @@
 package br.com.hotel_senior.cadastro_hospedes.mainConfigBean;
 
+import br.com.hotel_senior.cadastro_hospedes.application.gateways.CheckReservationGateway;
 import br.com.hotel_senior.cadastro_hospedes.application.gateways.CheckinHotelGateway;
 import br.com.hotel_senior.cadastro_hospedes.application.gateways.CheckoutGuestGateway;
 import br.com.hotel_senior.cadastro_hospedes.application.gateways.GuestGateway;
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.CheckinUseCase;
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.CheckoutUseCase;
+import br.com.hotel_senior.cadastro_hospedes.application.usecases.ConsultUsecase;
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.GuestUseCase;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl.CheckReservationGatewayImpl;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl.CheckinHotelGatewayImpl;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl.CheckoutGuestGatewayImpl;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.gatewaysAppImpl.GuestGatewayImpl;
@@ -61,5 +64,15 @@ public class BeansConfig {
     @Bean
     CheckoutGuestGateway checkoutGuestGateway(CheckoutHotelRepository checkoutHotelRepository){
         return new CheckoutGuestGatewayImpl(checkoutHotelRepository);
+    }
+
+    @Bean
+    ConsultUsecase consultUsecase(CheckReservationGateway checkReservationGateway, RequestAndResponseDomainMapper mapper){
+        return new ConsultUsecase(checkReservationGateway, mapper);
+    }
+
+    @Bean
+    CheckReservationGateway checkReservationGateway(GuestRepository guestRepository, DomainAndEntityMapper mapper){
+        return new CheckReservationGatewayImpl(guestRepository, mapper);
     }
 }

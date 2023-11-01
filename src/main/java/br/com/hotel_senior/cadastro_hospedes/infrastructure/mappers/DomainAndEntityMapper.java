@@ -63,4 +63,13 @@ public class DomainAndEntityMapper {
                         guest.getHotelReservation().getHotelBookingStatus()
         ));
     }
+
+    public List<StatusReservationDomain> fromEntityToDomainBasedCheckinStatusQuery(List<Guest> guests){
+        var listToDomain = new ArrayList<StatusReservationDomain>();
+        for (Guest guest :
+                guests) {
+            listToDomain.add(new StatusReservationDomain(guest, guest.getHotel(), guest.getHotelReservation()));
+        }
+        return listToDomain;
+    }
 }
