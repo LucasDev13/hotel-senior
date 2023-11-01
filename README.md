@@ -172,3 +172,6 @@ http://localhost:8080/swagger-ui.html
   "dataCheckout": "2023-10-31T19:20:00"
 }
 ```
+- Consulta os hóspedes com status de CHECKIN:
+  * http://localhost:8080/v1/api/consult/<PathVariable>
+  * `GET`
