@@ -8,7 +8,9 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponse;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponseList;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.HotelGuestUpdateResponse;
+import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.StatusReservationResponse;
 import org.springframework.data.domain.Page;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,5 +55,14 @@ public class RequestAndResponseDomainMapper {
 
     public GuestCheckoutDomain fromCheckoutRequestToCheckoutDomain(GuestCheckoutRequest guestCheckoutRequest){
         return new GuestCheckoutDomain(guestCheckoutRequest.document(), guestCheckoutRequest.checkoutDate());
+    }
+
+    public List<StatusReservationResponse> fromDomainToResponseBasedCheckinStatusQuery(List<StatusReservationDomain> statusReservationDomains){
+        var listToResponse = new ArrayList<StatusReservationResponse>();
+        for (StatusReservationDomain reservationDomain :
+                statusReservationDomains) {
+            listToResponse.add(new StatusReservationResponse(reservationDomain.guest(), reservationDomain.hotel(), reservationDomain.hotelReservation()));
+        }
+        return listToResponse;
     }
 }
