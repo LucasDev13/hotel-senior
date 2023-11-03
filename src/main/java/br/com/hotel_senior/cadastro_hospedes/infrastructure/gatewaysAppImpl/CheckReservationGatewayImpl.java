@@ -23,6 +23,6 @@ public class CheckReservationGatewayImpl implements CheckReservationGateway {
     @Transactional
     public List<StatusReservationDomain> checkReservationByStatus(String status) {
         var guests = guestRepository.findByHotelReservationHotelBookingStatus(HotelBookingStatus.valueOf(status.toUpperCase()));
-        return mapper.fromEntityToDomainBasedCheckinStatusQuery(guests);
+        return mapper.fromEntityToDomainBasedStatusQuery(guests);
     }
 }

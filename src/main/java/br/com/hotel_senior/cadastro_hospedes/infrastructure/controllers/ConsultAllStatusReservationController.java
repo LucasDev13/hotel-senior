@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/v1/api/consult", produces = {"application/json"})
-public class ConsultAllCheckinController {
+public class ConsultAllStatusReservationController {
 
     private final ConsultUsecase consultUsecase;
 
-    public ConsultAllCheckinController(ConsultUsecase consultUsecase) {
+    public ConsultAllStatusReservationController(ConsultUsecase consultUsecase) {
         this.consultUsecase = consultUsecase;
     }
 
     @GetMapping(value = "/{status}")
-    @Operation(summary = "Consulta as reservas dos hospedes pelo status de 'checkin'.", method = "GET")
+    @Operation(summary = "Consulta as reservas dos hospedes pelo status de 'checkin' e 'checkout'.", method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso."),
             @ApiResponse(responseCode = "404", description = "Dados de requisição inválida."),
