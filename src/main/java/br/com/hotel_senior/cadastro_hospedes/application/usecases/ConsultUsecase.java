@@ -17,6 +17,6 @@ public class ConsultUsecase {
 
     public List<StatusReservationResponse> checkReservationByStatus(String status) {
         var response = checkReservationGateway.checkReservationByStatus(status);
-        return mapper.fromDomainToResponseBasedCheckinStatusQuery(response);
+        return mapper.fromDomainToResponseBasedStatusQuery(response);
     }
 }

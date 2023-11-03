@@ -57,11 +57,11 @@ public class RequestAndResponseDomainMapper {
         return new GuestCheckoutDomain(guestCheckoutRequest.document(), guestCheckoutRequest.checkoutDate());
     }
 
-    public List<StatusReservationResponse> fromDomainToResponseBasedCheckinStatusQuery(List<StatusReservationDomain> statusReservationDomains){
+    public List<StatusReservationResponse> fromDomainToResponseBasedStatusQuery(List<StatusReservationDomain> statusReservationDomains){
         var listToResponse = new ArrayList<StatusReservationResponse>();
         for (StatusReservationDomain reservationDomain :
                 statusReservationDomains) {
-            listToResponse.add(new StatusReservationResponse(reservationDomain.guest(), reservationDomain.hotel(), reservationDomain.hotelReservation()));
+            listToResponse.add(new StatusReservationResponse(reservationDomain.guest()));
         }
         return listToResponse;
     }
