@@ -6,8 +6,10 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.response.GuestResponseList;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndResponseDomainMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/v1/api/checkin", produces = {"application/json"})
+@Tag(name = "Realiza checkin", description = "Endpoint utilizado para realizar o checkin do hospede.")
 public class CheckinGuestController {
 
     private final CheckinUseCase checkinUseCase;
@@ -55,7 +58,8 @@ public class CheckinGuestController {
             @ApiResponse(responseCode = "400", description = "Parametros inválidos."),
             @ApiResponse(responseCode = "500", description = "Erro interno do sistema."),
     })
-    public ResponseEntity<?> consultByParam(@RequestParam("param") String param){
+    public ResponseEntity<?> consultByParam(
+            @Parameter(description = "Recebe o nome, documento ou o telefone do hospede") @RequestParam("param") String param){
         List<GuestResponseList> guests = new ArrayList<>();
         if(!param.isEmpty()){
             guests = checkinUseCase.findGuests(param);

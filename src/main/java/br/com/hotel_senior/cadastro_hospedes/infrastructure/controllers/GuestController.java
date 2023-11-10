@@ -1,7 +1,6 @@
 package br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers;
 
 import br.com.hotel_senior.cadastro_hospedes.application.usecases.GuestUseCase;
-import br.com.hotel_senior.cadastro_hospedes.domain.EntityDomain.GuestDomainById;
 import br.com.hotel_senior.cadastro_hospedes.exceptions.ResourceNotFoundException;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.GuestRequest;
 import br.com.hotel_senior.cadastro_hospedes.infrastructure.controllers.request.HotelGuestUpdateRequest;
@@ -10,20 +9,22 @@ import br.com.hotel_senior.cadastro_hospedes.infrastructure.mappers.RequestAndRe
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/v1/api/guests", produces = {"application/json"})
+@Tag(name = "CRUD do hospede", description = "Endpoints utilizados para o crud do hospede.")
 public class GuestController {
 
     private final GuestUseCase guestUseCase;
